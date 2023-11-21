@@ -15,5 +15,16 @@
         public float? Price { get; set; }
 
         public int? SpecialtyId { get; set; }
+
+        public string? SpecialtyDesc { get; set; }
+
+        public string? About { get; set; }
+
+        public string? Location { get; set; }
+
+        public string? Tel { get; set; }
+
+        public string? Schedule { get; set;  }
+
     }
 }
