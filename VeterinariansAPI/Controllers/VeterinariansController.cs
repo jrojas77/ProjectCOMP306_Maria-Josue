@@ -1,6 +1,8 @@
 ﻿using _301290835_Maria_Josue_3013473439_Project.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VeterinariansAPI.DTO;
 using VeterinariansAPI.Services;
 
 namespace VeterinariansAPI.Controllers
@@ -10,10 +12,12 @@ namespace VeterinariansAPI.Controllers
     {
 
         private IVeterinariansRepository _veterinariansRepository;
+        private readonly IMapper _mapper;
 
-        public VeterinariansController(IVeterinariansRepository veterinariansRepository)
+        public VeterinariansController(IVeterinariansRepository veterinariansRepository, IMapper mapper)
         {
             _veterinariansRepository = veterinariansRepository;
+            _mapper = mapper;
         }
 
 
@@ -23,7 +27,8 @@ namespace VeterinariansAPI.Controllers
         public async Task<ActionResult<Veterinarian>> GetAllVeterinarians()
         {
             var veterinarians = await _veterinariansRepository.GetAllVeterinarians();
-            return Ok(veterinarians);
+            var results = _mapper.Map<IEnumerable<VeterinarianDTO>>(veterinarians);
+            return Ok(results);
         }
 
         //// GET: VeterinariansController/Details/5

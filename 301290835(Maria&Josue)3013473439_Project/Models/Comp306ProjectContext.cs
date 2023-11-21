@@ -19,6 +19,10 @@ public partial class Comp306ProjectContext : DbContext
 
     public virtual DbSet<Veterinarian> Veterinarians { get; set; }
 
+    public virtual DbSet<Doctor> Doctors { get; set; }
+
+    public virtual DbSet<Pet> Pets { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=desktop-r1h0v9q;Initial Catalog=COMP306_Project;Integrated Security=True; TrustServerCertificate=True");
@@ -43,6 +47,25 @@ public partial class Comp306ProjectContext : DbContext
             entity.Property(e => e.Keywords).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.Schedule).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<Doctor>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.Property(e => e.Name).HasMaxLength(50);
+            entity.Property(e => e.Lastname).HasMaxLength(50);
+            entity.Property(e => e.Gender).HasMaxLength(50);
+            entity.Property(e => e.Price).HasMaxLength(50);
+            entity.Property(e => e.VeterinarianId).HasMaxLength(50);
+            entity.Property(e => e.SpecialtyId).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<Pet>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.Property(e => e.Type).HasMaxLength(50);
         });
 
         OnModelCreatingPartial(modelBuilder);
